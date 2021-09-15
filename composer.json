@@ -1,0 +1,13 @@
+{
+    "name": "jonatas/manga_webscraping",
+    "description": "webscraping do site manga host para download dos mangas",
+    "authors": [
+        {
+            "name": "Jônatas Mota Da Silva Júnior",
+            "email": "jonatasjr.019@gmail.com"
+        }
+    ],
+    "require": {
+        "chrome-php/chrome": "^1.0"
+    }
+}
