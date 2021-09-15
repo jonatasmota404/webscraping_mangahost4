@@ -8,6 +8,7 @@
         }
     ],
     "require": {
-        "chrome-php/chrome": "^1.0"
+        "chrome-php/chrome": "^1.0",
+      "ext-readline": "*"
     }
 }

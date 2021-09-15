@@ -3,16 +3,25 @@
 require "vendor/autoload.php";
 
 use HeadlessChromium\BrowserFactory;
+use HeadlessChromium\Exception\CommunicationException;
 
 $browserFactory = new BrowserFactory();
+echo "Digite a url\n";
+$url = readline();
+echo "Digite a quantidade\n";
+$qtd = readline();
+if (!$qtd){
+    $qtd = 1;
+}
 
 // starts headless chrome
 $browser = $browserFactory->createBrowser(['customFlags' => ['--lang=pt-BR']]);
 
 try {
     // creates a new page and navigate to an url
+    //'https://mangahost4.com/manga/rosariovampire-mh13937'
     $page = $browser->createPage();
-    $page->navigate('https://mangahost4.com/manga/rosariovampire-mh13937')->waitForNavigation();
+    $page->navigate($url)->waitForNavigation();
 
     //get manga title
     $mangaTitle = $page->evaluate("document.querySelector('.title').innerText")->getReturnValue(9999999999);
@@ -29,7 +38,7 @@ try {
 
     //get image links from manga
     foreach (array_reverse($mangaLinks) as $index => $mangaLink){
-        if ($index >=5){
+        if ($index >= $qtd){
             break;
         }
         $chapterArray = explode("/", $mangaLink);
@@ -58,6 +67,8 @@ try {
             closedir($dh);
         }
     }
+} catch (CommunicationException $e) {
+    echo $e->getMessage();
 } finally {
     // bye
     $browser->close();
