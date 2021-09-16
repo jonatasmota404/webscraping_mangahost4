@@ -9,6 +9,7 @@
     ],
     "require": {
         "chrome-php/chrome": "^1.0",
-      "ext-readline": "*"
+        "ext-readline": "*",
+        "ext-zip": "*"
     }
 }

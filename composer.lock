@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "be2fd32b3e73c4eccbff6a7ee4ce2097",
+    "content-hash": "ad25c59ccf89d906b6f46b1cc8d59356",
     "packages": [
         {
             "name": "apix/log",
@@ -569,7 +569,10 @@
     "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "ext-readline": "*",
+        "ext-zip": "*"
+    },
     "platform-dev": [],
     "plugin-api-version": "2.0.0"
 }

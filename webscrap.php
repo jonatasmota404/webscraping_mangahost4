@@ -1,25 +1,35 @@
 <?php
 
 require "vendor/autoload.php";
+require "ZipDownload.php";
 
 use HeadlessChromium\BrowserFactory;
 use HeadlessChromium\Exception\CommunicationException;
+use HeadlessChromium\Exception\EvaluationFailed;
 
 $browserFactory = new BrowserFactory();
 echo "Digite a url\n";
 $url = readline();
-echo "Digite a quantidade\n";
-$qtd = readline();
-if (!$qtd){
-    $qtd = 1;
+$exit = false;
+
+while ($exit !== true){
+    echo "Digite a quantidade\n";
+    $qtd = readline();
+    if (!$qtd || !is_numeric($qtd)){
+        echo "Digite um número\n";
+    }else{
+        $exit = true;
+    }
 }
+
+echo "Digite o caminho para o manga\n";
+$mangaDir = readline();
 
 // starts headless chrome
 $browser = $browserFactory->createBrowser(['customFlags' => ['--lang=pt-BR']]);
 
 try {
     // creates a new page and navigate to an url
-    //'https://mangahost4.com/manga/rosariovampire-mh13937'
     $page = $browser->createPage();
     $page->navigate($url)->waitForNavigation();
 
@@ -67,9 +77,12 @@ try {
             closedir($dh);
         }
     }
-} catch (CommunicationException $e) {
+} catch (CommunicationException | EvaluationFailed | Exception $e) {
     echo $e->getMessage();
 } finally {
     // bye
     $browser->close();
+    $zip = new ZipDownload($mangaTitle, 'manga');
+    $zip->createZipArchive($mangaDir);
+    $zip->clear();
 }
