@@ -85,4 +85,5 @@ try {
     $zip = new ZipDownload($mangaTitle, 'manga');
     $zip->createZipArchive($mangaDir);
     $zip->clear();
+
 }
