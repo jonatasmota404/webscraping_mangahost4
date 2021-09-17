@@ -1,7 +1,7 @@
 <?php
 
 
-class ZipDownload extends ZipArchive
+class Zip extends ZipArchive
 {
     public string $fileName;
     public string $dir;
@@ -12,8 +12,8 @@ class ZipDownload extends ZipArchive
     {
         $this->fileName = $fileName;
         $this->dir = $dir;
-        $this->path = __DIR__ . '\\' . $this->dir;
-        $this->fullPath = $this->path . '\\' . $this->fileName . '.zip';
+        $this->path = __DIR__ . '/' . $this->dir;
+        $this->fullPath = $this->path . '/' . $this->fileName . '.zip';
     }
 
     private function listDir($dir) :array
@@ -34,7 +34,7 @@ class ZipDownload extends ZipArchive
 
     public function createZipArchive(?string $path) :void
     {
-        $fullPath = is_null($path)?$this->fullPath:$path."\\".$this->fileName . ".zip";
+        $fullPath = is_null($path)?$this->fullPath:$path."/".$this->fileName . ".zip";
         // Criamos o arquivo e verificamos se ocorreu tudo certo
         if( $this->open($fullPath, ZipArchive::CREATE) ){
             $listSubDir = $this->listSubDir();
@@ -43,7 +43,7 @@ class ZipDownload extends ZipArchive
                 $scanDir = $this->listDir($dir);
                 // adiciona ao zip todos os arquivos contidos no diretório.
                 foreach($scanDir as $file){
-                    $this->addFile($this->path.'\\'.$dir."\\".$file, $dir."\\".$file);
+                    $this->addFile($this->path.'/'.$dir."/".$file, $dir."/".$file);
                 }
             }
             // fechar o arquivo zip após a inclusão dos arquivos desejados
@@ -64,7 +64,25 @@ class ZipDownload extends ZipArchive
         }
     }
 
-    public function clear(){
-        unlink($this->path);
+    //remove todos os arquivos e exclui o diretório de forma recursiva
+    public function clear(?string $src = null): void
+    {
+        if (is_null($src)){
+            $src = $this->path;
+        }
+        $dir = opendir($src);
+        while(false !== ( $file = readdir($dir)) ) {
+            if (( $file !== '.' ) && ( $file !== '..' )) {
+                $full = $src . '/' . $file;
+                if ( is_dir($full) ) {
+                    $this->clear($full);
+                }
+                else {
+                    unlink($full);
+                }
+            }
+        }
+        closedir($dir);
+        rmdir($src);
     }
 }
