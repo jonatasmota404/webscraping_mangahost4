@@ -19,7 +19,7 @@ php index.php
 
 Com o script rodando:
 <ul>
-    <li>Digite a url do mangá desejado - <a href="https://mangahost4.com/manga/one-piece-br-mh32138">Exemplo</a></li>
+    <li>Digite a url do mangá desejado - <a href="https://mangahost4.com/manga/one-piece-br-mh32138" target="_blank">Exemplo</a></li>
     <li>Digite quantos mangás serão baixado após o mangá inicial</li>
-    <li>Digite o caminho da pasta que será baixado os arquivo zip. </li>
+    <li>Digite o caminho da pasta que será baixado o arquivo zip. </li>
 </ul>
