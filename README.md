@@ -20,5 +20,6 @@ php index.php
 #### Com o script rodando:
 
 - Digite a url do mangá desejado - <a href="https://mangahost4.com/manga/one-piece-br-mh32138" target="_blank">Exemplo</a>
-- Digite quantos mangás serão baixados após o mangá inicial
+- Digite o capítulo que será baixado.
+- Digite quantos mangás serão baixados após o capítulo selecionado.
 - Digite o caminho da pasta que será baixado o arquivo zip.

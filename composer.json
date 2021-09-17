@@ -12,4 +12,8 @@
         "ext-readline": "*",
         "ext-zip": "*"
     }
+    ,
+    "require-dev": {
+        "roave/security-advisories": "dev-latest"
+    }
 }
