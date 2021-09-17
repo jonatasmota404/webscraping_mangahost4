@@ -65,6 +65,6 @@ class ZipDownload extends ZipArchive
     }
 
     public function clear(){
-        unlink($this->fullPath);
+        unlink($this->path);
     }
 }
